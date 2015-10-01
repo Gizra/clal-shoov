@@ -61,12 +61,23 @@ describe('Visual monitor testing', function() {
   it('should show the home page',function(done) {
     client
       .url(baseUrl)
+      .pause(5000)
       .webdrivercss(testName + '.homepage', {
         name: '1',
-        exclude: [],
-        remove: [],
+        exclude:
+          [
+            // Banner.
+            '#ctl00_SPWebPartManager1_g_befc5f62_8652_4640_a506_12470a34b7c7_ctl01_banner',
+            // continer
+            '.ZoneHomePage1Column',
+          ],
+        remove:
+          [
+            // Chat.
+            'body #nanoRepProxyContainer.DontPrint',
+          ],
         hide: [],
-        screenWidth: selectedCaps == 'chrome' ? [640, 960, 1200] : undefined,
+        screenWidth: selectedCaps == 'chrome' ? [960] : undefined,
       }, resultsCallback)
       .call(done);
   });
